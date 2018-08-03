@@ -63,9 +63,15 @@ def mimic_dict(filename):
 def print_mimic(mimic_dict, word):
   """Given mimic dict and start word, prints 200 random words."""
   my_random_list = []
-  for _ in range(200):
-    random_word = random.choice(mimic_dict.get(word))
-    my_random_list.append(random_word)
+  while len(my_random_list) < 200:
+    if word in mimic_dict:
+      random_word = random.choice(mimic_dict.get(word))  
+      word = random_word
+      my_random_list.append(random_word)
+    else: 
+      word = ''         
+  print "Number of words:", len(my_random_list)
+  print
   print ' '.join(my_random_list)
 
 # Provided main(), calls mimic_dict() and mimic()
@@ -76,7 +82,6 @@ def main():
 
   dict = mimic_dict(sys.argv[1])
   print_mimic(dict, '')
-
 
 if __name__ == '__main__':
   main()
